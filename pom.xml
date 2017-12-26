@@ -6,7 +6,7 @@
 
     <groupId>ma.ac.emi.jt4nk</groupId>
     <artifactId>JenkinsSample</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <build>
         <plugins>
             <plugin>

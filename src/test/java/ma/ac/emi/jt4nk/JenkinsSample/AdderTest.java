@@ -4,8 +4,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test helpers for addition
+ */
 public class AdderTest {
 
+    /**
+     * Test addition method
+     */
     @Test
     public void add() {
         assertEquals("Basic addition", 2, Adder.add(1, 1));

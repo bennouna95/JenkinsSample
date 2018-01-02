@@ -16,7 +16,7 @@ pipeline {
         stage ('Test'){
             steps {
                 bat 'mvn surefire:test'
-                bat 'mvn coverage:coverage'
+                bat 'mvn cobertura:cobertura'
             }
             post {
                 success {

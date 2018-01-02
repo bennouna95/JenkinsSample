@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>ma.ac.emi.jt4nk</groupId>
     <artifactId>JenkinsSample</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -26,7 +25,6 @@
             <version>RELEASE</version>
         </dependency>
     </dependencies>
-
     <reporting>
         <plugins>
             <plugin>
@@ -42,13 +40,14 @@
             </plugin>
         </plugins>
     </reporting>
-    <!--
     <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>1</id>
-            <name>Dépôt d’entreprise</name>
-            <url>http://localhost:8081/nexus/content/repositories/jenkins-sample/</url>
+            <id>nexus-releases</id>
+            <url>http://localhost:8081/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>
-    -->
 </project>

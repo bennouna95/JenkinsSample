@@ -20,7 +20,7 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml' 
+                    junit '**/target/*.xml' 
                 }
             }
         }
@@ -36,6 +36,14 @@ pipeline {
             steps {
                 bat 'mvn jar:jar'
             }
+        }
+    }
+    post {
+        success {
+            bat 'mvn deploy:deploy'
+        }
+        failure {
+            mail to: joel.tankam@gmail.com, subject: 'The Pipeline failed :('
         }
     }
 }

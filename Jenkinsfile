@@ -20,7 +20,8 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/*.xml' 
+                    junit '**/target/surefire-reports/*.xml'
+                    junit '**/target/site/cobertura/coverage.xml'
                 }
             }
         }
@@ -44,8 +45,8 @@ pipeline {
         }
         failure {
             mail (to: 'joel.tankam@gmail.com',
-                    subject: "Build failed : '${env.JOB_NAME}' (${env.BUILD_NUMBER}) ",
-                    body: "Check it out ${env.BUILD_URL}.");
+                    subject: "Build failed : JenkinsPipeline",
+                    body: "Check it out.");
         }
     }
 }

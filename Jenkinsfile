@@ -5,14 +5,13 @@ pipeline {
         maven 'maven 3.5.2'
         jdk 'java 1.8.0_141'
     }
+    agent {label 'SampleNode'}
     stages {
-        
         stage ('Build') {
             steps {
             bat 'mvn clean compile'
             }
         }
-
         stage ('Test'){
             steps {
                 bat 'mvn test cobertura:cobertura'
@@ -24,7 +23,6 @@ pipeline {
                 }
             }
         }
-
         stage ('Documentation'){
             steps {
                 bat 'mvn javadoc:javadoc site'
@@ -35,7 +33,6 @@ pipeline {
                 }
             }
         }
-
         stage ('Artifacts'){
             steps {
                 bat 'mvn install'

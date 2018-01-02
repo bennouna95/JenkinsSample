@@ -9,13 +9,13 @@ pipeline {
         
         stage ('Build') {
             steps {
-            bat 'mvn clean compiler:compile'
+            bat 'mvn clean compile'
             }
         }
 
         stage ('Test'){
             steps {
-                bat 'mvn surefire:test cobertura:cobertura'
+                bat 'mvn test cobertura:cobertura'
             }
             post {
                 success {
@@ -27,19 +27,19 @@ pipeline {
 
         stage ('Documentation'){
             steps {
-                bat 'mvn javadoc:javadoc site:site'
+                bat 'mvn javadoc:javadoc site'
             }
         }
 
         stage ('Deployment'){
             steps {
-                bat 'mvn jar:jar'
+                bat 'mvn install'
             }
         }
     }
     post {
         success {
-            bat 'mvn deploy:deploy'
+            bat 'mvn deploy'
         }
         failure {
             mail (to: "joel.tankam@gmail.com",

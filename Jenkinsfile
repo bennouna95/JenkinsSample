@@ -28,7 +28,7 @@ pipeline {
         stage ('Documentation'){
             steps {
                 bat 'mvn javadoc:javadoc'
-                bat 'mvn site'
+                bat 'mvn site:site'
             }
         }
 
@@ -43,7 +43,9 @@ pipeline {
             bat 'mvn deploy:deploy'
         }
         failure {
-            mail to: joel.tankam@gmail.com, subject: 'The Pipeline failed :('
+            mail (to: 'joel.tankam@gmail.com',
+                    subject: "Build failed : '${env.JOB_NAME}' (${env.BUILD_NUMBER}) ",
+                    body: "Check it out ${env.BUILD_URL}.");
         }
     }
 }

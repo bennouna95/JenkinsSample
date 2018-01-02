@@ -21,7 +21,7 @@ pipeline {
                 success {
                     junit '**/target/surefire-reports/*.xml'
                     step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/target/site/cobertura/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
-                    step([$class: 'JavadocArchiver', javadocDir: 'build/docs/javadoc', keepAll: false])
+                    step([$class: 'JavadocArchiver', javadocDir: '**/target/site/apidocs', keepAll: false])
                 }
             }
         }
@@ -44,9 +44,9 @@ pipeline {
             bat 'mvn deploy'
         }
         failure {
-            mail (to: "joel.tankam@gmail.com",
-                    subject: "Build failed : JenkinsPipeline",
-                    body: "Check it out.");
+            mail (to: 'joel.tankam@gmail.com',
+                    subject: "Build failed : '${env.JOB_NAME}' (${env.BUILD_NUMBER}) ",
+                    body: "Check it out ${env.BUILD_URL}.");
         }
     }
 }

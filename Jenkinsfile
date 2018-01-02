@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     tools {
@@ -8,12 +9,32 @@ pipeline {
         
         stage ('Build') {
             steps {
-            bat 'mvn install'
+            bat 'mvn compiler:compile'
+            }
+        }
+
+        stage ('Test'){
+            steps {
+                bat 'mvn surefire:test'
+                bat 'mvn coverage:coverage'
             }
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml' 
                 }
+            }
+        }
+
+        stage ('Documentation'){
+            steps {
+                bat 'mvn javadoc:javadoc'
+                bat 'mvn site'
+            }
+        }
+
+        stage ('Deployment'){
+            steps {
+                bat 'mvn jar:jar'
             }
         }
     }

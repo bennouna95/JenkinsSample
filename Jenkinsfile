@@ -9,14 +9,13 @@ pipeline {
         
         stage ('Build') {
             steps {
-            bat 'mvn compiler:compile'
+            bat 'mvn clean compiler:compile'
             }
         }
 
         stage ('Test'){
             steps {
-                bat 'mvn surefire:test'
-                bat 'mvn cobertura:cobertura'
+                bat 'mvn surefire:test cobertura:cobertura'
             }
             post {
                 success {
@@ -28,8 +27,7 @@ pipeline {
 
         stage ('Documentation'){
             steps {
-                bat 'mvn javadoc:javadoc'
-                bat 'mvn site:site'
+                bat 'mvn javadoc:javadoc site:site'
             }
         }
 
@@ -44,7 +42,7 @@ pipeline {
             bat 'mvn deploy:deploy'
         }
         failure {
-            mail (to: 'joel.tankam@gmail.com',
+            mail (to: "joel.tankam@gmail.com",
                     subject: "Build failed : JenkinsPipeline",
                     body: "Check it out.");
         }

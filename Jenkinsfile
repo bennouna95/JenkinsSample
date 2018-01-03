@@ -33,6 +33,11 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube analysis') {
+    withSonarQubeEnv('My SonarQube Server') {
+      // requires SonarQube Scanner for Maven 3.2+
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+    }
         stage ('Artifacts'){
             steps {
                 bat 'mvn install'
@@ -45,7 +50,7 @@ pipeline {
             bat 'mvn deploy'
         }
         failure {
-            mail (to: 'joel.tankam@gmail.com',
+            mail (to: 'a.bennouna95@gmail.com',
                     subject: "Build failed : '${env.JOB_NAME}' (${env.BUILD_NUMBER}) ",
                     body: "Check it out ${env.BUILD_URL}.");
         }

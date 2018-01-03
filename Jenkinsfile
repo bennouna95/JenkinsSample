@@ -33,11 +33,16 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube analysis') {
-    withSonarQubeEnv('My SonarQube Server') {
-      // requires SonarQube Scanner for Maven 3.2+
-      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+      stage('Sonarqube analysis') {
+    steps {
+    script {
+             scannerHome = tool 'SonarScanner';
+        }
+     withSonarQubeEnv('SonarQube') {
+       bat "${scannerHome}\\bin\\sonar-scanner.bat" 
     }
+    }
+    } 
         stage ('Artifacts'){
             steps {
                 bat 'mvn install'
